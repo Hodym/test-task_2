@@ -24,8 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'name',
-            'description',
+            [
+                'attribute'=>'name',
+                'label' => Yii::t('control', 'Name'),
+            ],
+            [
+                'attribute'=>'description',
+                'label' => Yii::t('control', 'Description'),
+            ],
             [
                 'attribute'=>'updated_at',
                 'format' => ['date', 'php:Y.m.d H:i:s'],

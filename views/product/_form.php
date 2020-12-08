@@ -17,20 +17,20 @@ use app\models\Category;
 
     <div class="row">
         <div class="col-sm-6">
-            <h3>Русский перевод</h3>
-            <?= $form->field($model, 'name')->textInput(['maxlength' => 256]) ?>
-            <?= $form->field($model, 'description')->textInput() ?>
+            <h3><?= Yii::t('control', 'Russian translation') ?></h3>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => 256])->label(Yii::t('control', 'Name')) ?>
+            <?= $form->field($model, 'description')->textInput()->label(Yii::t('control', 'Description')) ?>
         </div>
         <div class="col-sm-6">
-            <h3>English version</h3>
-             <?= $form->field($model, 'name_en')->textInput(['maxlength' => 256]) ?>
-             <?= $form->field($model, 'description_en')->textInput() ?>
+            <h3><?= Yii::t('control', 'English translation') ?></h3>
+             <?= $form->field($model, 'name_en')->textInput(['maxlength' => 256])->label(Yii::t('control', 'Name').' En') ?>
+             <?= $form->field($model, 'description_en')->textInput()->label(Yii::t('control', 'Description').' En') ?>
         </div>
     </div>
     
-    <?= $form->field($model, 'category_id')->dropDownList(Category::getList()) ?>
+    <?= $form->field($model, 'category_id')->dropDownList(Category::getList())->label(Yii::t('control', 'Category')) ?>
     
-    <?= $form->field($model, 'file',['options'=>['class'=>'col-xs-12']])->widget(\kartik\file\FileInput::classname(), [
+    <?= $form->field($model, 'file',['options'=>['class'=>'col-xs-12']])->label(false)->widget(\kartik\file\FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => [
             'showCaption' => false,
@@ -38,7 +38,7 @@ use app\models\Category;
             'showUpload' => false,
             'browseClass' => 'btn btn-primary btn-block',
             'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
-            'browseLabel' =>  'Select Photo'
+            'browseLabel' =>  Yii::t('control', 'Select Photo')
         ],
     ]);?>
 

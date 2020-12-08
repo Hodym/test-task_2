@@ -30,8 +30,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            Yii::$app->language === 'ru' ? 'name' : 'name_en',
-            Yii::$app->language === 'ru' ? 'description' : 'description_en',
+            Yii::$app->language === 'ru' ? 
+            [
+                'attribute'=>'name',
+                'label' => Yii::t('control', 'Name'),
+            ]
+            : 
+            [
+                'attribute'=>'name_en',
+                'label' => Yii::t('control', 'Name'),
+            ],
+            Yii::$app->language === 'ru' ? 
+            [
+                'attribute'=>'description',
+                'label' => Yii::t('control', 'Description'),
+            ]
+            :
+            [
+                'attribute'=>'description_en',
+                'label' => Yii::t('control', 'Description'),
+            ],
             [
                 'attribute'=>'updated_at',
                 'format' => ['date', 'php:Y.m.d H:i:s'],

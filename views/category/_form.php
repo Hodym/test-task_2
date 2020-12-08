@@ -14,14 +14,14 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-sm-6">
-            <h3>Русский перевод</h3>
-            <?= $form->field($model, 'name')->textInput(['maxlength' => 256]) ?>
-            <?= $form->field($model, 'description')->textInput() ?>
+            <h3><?= Yii::t('control', 'Russian translation') ?></h3>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => 256])->label(Yii::t('control', 'Name')) ?>
+            <?= $form->field($model, 'description')->textInput()->label(Yii::t('control', 'Description')) ?>
         </div>
         <div class="col-sm-6">
-            <h3>English version</h3>
-             <?= $form->field($model, 'name_en')->textInput(['maxlength' => 256]) ?>
-             <?= $form->field($model, 'description_en')->textInput() ?>
+            <h3><?= Yii::t('control', 'English translation') ?></h3>
+             <?= $form->field($model, 'name_en')->textInput(['maxlength' => 256])->label(Yii::t('control', 'Name').' En') ?>
+             <?= $form->field($model, 'description_en')->textInput()->label(Yii::t('control', 'Description').' En') ?>
         </div>
     </div>
 

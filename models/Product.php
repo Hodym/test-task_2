@@ -82,7 +82,7 @@ class Product extends ActiveRecord
             'id' => Yii::t('models', 'ID'),
             'filename' => Yii::t('models', 'Photo'),
             'file' => Yii::t('models', 'Photosrc'),
-            'price' => Yii::t('models', 'Price'),
+            'price' => Yii::t('control', 'Price'),
             'category_id' => Yii::t('models', 'Category ID'),
         ];
     }

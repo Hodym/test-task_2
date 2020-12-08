@@ -25,26 +25,32 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'name',
-            //'description',
+            [
+                'attribute'=>'name',
+                'label' => Yii::t('control', 'Name'),
+            ],
             [
                 'attribute'=>'description',
+                'label' => Yii::t('control', 'Description'),
                 'value' => function ($dataProvider) {
                     return StringHelper::truncate($dataProvider->description, 100);
                 }
             ],
             [
                 'attribute'=>'category_id',
-                'label'=>'Category',
+                'label'=>Yii::t('control', 'Category'),
                 'value'=> 'categoryName',
             ],
             [
                 'attribute'=>'filename',
+                'label' => Yii::t('control', 'Photo'),
                 'value'=> 'smallImage',
                 'format'=>'image',
             ],
-            //'filename',
-            'price',
+            [
+                'attribute'=>'price',
+                'label'=>Yii::t('control', 'Price'),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

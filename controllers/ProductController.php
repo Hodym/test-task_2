@@ -8,6 +8,9 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\CommentForm;
+use app\models\Feedback;
+use yii\data\Pagination;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -70,8 +73,42 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $commentForm = new CommentForm();
+
+        $comment = new Feedback();
+        if ($commentForm->load(Yii::$app->request->post())) {
+            $comment->product_id = $id;
+            $comment->username = $commentForm->username;
+            $comment->email = $commentForm->email;
+            $comment->reviews = $commentForm->reviews;
+
+            if ($comment->save()) {
+                Yii::$app->session->setFlash('success', Yii::t('control', '{username} your comment has been added!', ['username' => $comment->username,]));
+                return $this->refresh();
+            }
+        }
+        
+        $query = Feedback::find()->where(['product_id' => $id])->orderBy(['id' => SORT_DESC]);      
+        //$comments = $product->comments;
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 3, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $comments = $query->offset($pages->offset)->limit($pages->limit)->all();
+
+        if (!Yii::$app->user->isGuest) {
+            $userData = [];
+            $userData['name'] = Yii::$app->user->identity->username;
+            $userData['email'] = Yii::$app->user->identity->email;
+        } else {
+            $userData['name'] = '';
+            $userData['email'] = '';
+        }
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'comments' => $comments, 
+            'commentForm' => $commentForm,
+            'pages' => $pages,
+            'userData' => $userData,
         ]);
     }
 

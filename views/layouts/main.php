@@ -49,8 +49,8 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => Yii::t('menu', 'Home'), 'url' => ['/site/index']],
-            ['label' => Yii::t('menu', 'About'), 'url' => ['/site/about']],
-            ['label' => Yii::t('menu', 'Contact'), 'url' => ['/site/contact']],
+            ['label' => Yii::t('menu', 'Categories'), 'url' => ['/category/index']],
+            ['label' => Yii::t('menu', 'Products'), 'url' => ['/product/index']],
             $languageItem->toArray(),
             Yii::$app->user->isGuest ? (
                 ['label' => Yii::t('menu', 'Login'), 'url' => ['/site/login']]

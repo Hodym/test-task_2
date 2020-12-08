@@ -7,7 +7,8 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language' => 'ru-RU',
+    'language' => 'ru',
+    'sourceLanguage' => 'en',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -51,19 +52,25 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'site/index',
             ],
         ],
         'i18n' => [
             'translations' => [
                 'app*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@app/messages',
-                    'sourceLanguage' => 'en-US',
                 ],
                 'menu' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@app/messages',
-                    'sourceLanguage' => 'en-US',
+                    'basePath' => '@app/messages'
+                ],
+                'models' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages'
+                ],
+                'control' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages'
                 ],
             ],
         ],

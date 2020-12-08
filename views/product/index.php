@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -25,13 +26,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-            'description',
+            //'description',
+            [
+                'attribute'=>'description',
+                'value' => function ($dataProvider) {
+                    return StringHelper::truncate($dataProvider->description, 100);
+                }
+            ],
             [
                 'attribute'=>'category_id',
                 'label'=>'Category',
                 'value'=> 'categoryName',
             ],
-            'filename',
+            [
+                'attribute'=>'filename',
+                'value'=> 'smallImage',
+                'format'=>'image',
+            ],
+            //'filename',
             'price',
 
             ['class' => 'yii\grid\ActionColumn'],

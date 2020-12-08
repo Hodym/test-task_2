@@ -12,8 +12,13 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@images'   => '@app/web/uploads/images',
     ],
     'components' => [
+        'image' => [
+            'class' => 'yii\image\ImageDriver',
+            'driver' => 'GD',  //GD or Imagick
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'AyKK4OM0q7Rk6gx9-I92zrk3xdkxtc5D',

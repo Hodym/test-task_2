@@ -62,7 +62,7 @@ class m201126_110637_Multilingual extends Migration
         //Создание таблицы товаров    
         $this->createTable('{{%product}}', [    
             'id' => $this->primaryKey(),
-            'filename' => $this->string()->notNull(),
+            'filename' => $this->string(),
             'price' => $this->float()->notNull(),
             'category_id' => $this->integer(10)->notNull(),
         ], $tableOptions);    

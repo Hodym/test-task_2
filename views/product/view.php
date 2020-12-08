@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
 
-$this->title = $model->id;
+$this->title = Yii::$app->language === 'ru' ? $model->name : $model->name_en;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('control', 'Products'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -30,9 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'filename',
+            Yii::$app->language === 'ru' ? 'name' : 'name_en',
+            Yii::$app->language === 'ru' ? 'description' : 'description_en',
+            [
+                'attribute'=>'category_id',
+                'label'=>'Category',
+                'value'=> $model->categoryName,
+            ],
+            [
+                'attribute'=>'filename',
+                'value'=> $model->image,
+                'format'=>'image',
+            ],
             'price',
-            'category_id',
         ],
     ]) ?>
 

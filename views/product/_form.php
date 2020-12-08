@@ -11,7 +11,9 @@ use app\models\Category;
 
 <div class="product-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype'=> 'multipart/form-data'],
+    ]); ?>
 
     <div class="row">
         <div class="col-sm-6">
@@ -28,7 +30,17 @@ use app\models\Category;
     
     <?= $form->field($model, 'category_id')->dropDownList(Category::getList()) ?>
     
-    <?= $form->field($model, 'filename')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'file',['options'=>['class'=>'col-xs-12']])->widget(\kartik\file\FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => [
+            'showCaption' => false,
+            'showRemove' => false,
+            'showUpload' => false,
+            'browseClass' => 'btn btn-primary btn-block',
+            'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+            'browseLabel' =>  'Select Photo'
+        ],
+    ]);?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 

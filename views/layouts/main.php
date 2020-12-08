@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use cetver\LanguageSelector\items\DropDownLanguageItem;
 
 AppAsset::register($this);
 ?>
@@ -28,6 +29,15 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    
+    $languageItem = new DropDownLanguageItem([
+        'languages' => [
+            'en' => '<span class="flag-icon flag-icon-us"></span> English',
+            'ru' => '<span class="flag-icon flag-icon-ru"></span> Russian',
+        ],
+        'options' => ['encode' => false],
+    ]);
+    
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -38,16 +48,19 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => Yii::t('menu', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('menu', 'About'), 'url' => ['/site/about']],
+            ['label' => Yii::t('menu', 'Contact'), 'url' => ['/site/contact']],
+            $languageItem->toArray(),
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => Yii::t('menu', 'Login'), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    Yii::t('menu', 'Logout ({username})', [
+                         'username' => Yii::$app->user->identity->username
+                    ]),
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -69,7 +82,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?=Yii::t('menu', 'My Company')?> <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
